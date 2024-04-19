@@ -1,6 +1,6 @@
 import r2wc from "@r2wc/react-to-web-component";
-import CollectionDays from "./App";
+import ModalAlert from "./App";
 
-const binCollections = r2wc(CollectionDays, { props: { uprn: "string" } });
+const modal = r2wc(ModalAlert);
 
-customElements.define("upcoming-bin-collections", binCollections);
+customElements.define("modal-alert", modal);
