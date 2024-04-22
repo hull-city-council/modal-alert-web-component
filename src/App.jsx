@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import useFetch from "react-fetch-hook";
 import * as sanitizeHtml from "sanitize-html";
 import { CssVarsProvider } from "@mui/joy/styles";
@@ -9,12 +9,24 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 
 export default function ModalAlert() {
+  const visible = localStorage.getItem("alertModal");
   const [open, setOpen] = React.useState(true);
+
+  function setVisibility(modified) {
+    localStorage.setItem("alertModal", modified);
+    setOpen(false);
+  }
+
   const { isLoading, data } = useFetch(
     `https://prod-225.westeurope.logic.azure.com/workflows/14d28202dcc447fd9865c11b49daadd8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RaKBqCtzz-LGPL4Rkok-zwxY3RPuM7z1jOD_I5Sr0vU`,
   );
-  console.log(data);
-  if (!isLoading && data && data[0]?.active) {
+
+  if (
+    !isLoading &&
+    data &&
+    data[0]?.active &&
+    visible != data[0]?.last_modified
+  ) {
     return (
       <>
         <CssVarsProvider defaultMode="dark">
@@ -22,7 +34,7 @@ export default function ModalAlert() {
             aria-labelledby={data[0]?.title}
             aria-describedby="modal-desc"
             open={open}
-            onClose={() => setOpen(false)}
+            onClose={() => setVisibility(data[0]?.last_modified)}
             sx={{
               display: "flex",
               justifyContent: "center",
@@ -38,7 +50,7 @@ export default function ModalAlert() {
               }}
             >
               <ModalClose variant="plain" sx={{ m: 1 }} />
-              <AspectRatio objectFit="object-fit">
+              <AspectRatio objectFit="cover">
                 <img
                   src={
                     "data:" +
