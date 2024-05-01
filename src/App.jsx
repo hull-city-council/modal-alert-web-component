@@ -4,6 +4,7 @@ import * as sanitizeHtml from "sanitize-html";
 import { CssVarsProvider } from "@mui/joy/styles";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Modal from "@mui/joy/Modal";
+import ModalDialog from "@mui/joy/ModalDialog";
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
@@ -41,41 +42,46 @@ export default function ModalAlert() {
               alignItems: "center",
             }}
           >
-            <Sheet
-              sx={{
-                maxWidth: 500,
-                borderRadius: "md",
-                p: 3,
-                boxShadow: "lg",
-              }}
-            >
+            <ModalDialog layout="center">
               <ModalClose variant="plain" sx={{ m: 1 }} />
-              <AspectRatio objectFit="cover">
-                <img
-                  src={
-                    "data:" +
-                    data[0]?.image.$content +
-                    ";base64," +
-                    data[0]?.image.$content
-                  }
-                />
-              </AspectRatio>
-              <Typography
-                component="h2"
-                id="modal-title"
-                level="h4"
-                textColor="inherit"
-                fontWeight="lg"
-                mb={1}
-              >
-                {data[0]?.title}
-              </Typography>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: sanitizeHtml(data[0]?.content),
+              <Sheet
+                sx={{
+                  maxWidth: 500,
+                  borderRadius: "md",
+                  p: 1,
+                  mt: 4,
+                  boxShadow: "lg",
+                  overflowX: "hidden",
+                  overflowY: "scroll",
                 }}
-              ></div>
-            </Sheet>
+              >
+                <AspectRatio objectFit="cover">
+                  <img
+                    src={
+                      "data:" +
+                      data[0]?.image.$content +
+                      ";base64," +
+                      data[0]?.image.$content
+                    }
+                  />
+                </AspectRatio>
+                <Typography
+                  component="h2"
+                  id="modal-title"
+                  level="h4"
+                  textColor="inherit"
+                  fontWeight="lg"
+                  mb={1}
+                >
+                  {data[0]?.title}
+                </Typography>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizeHtml(data[0]?.content),
+                  }}
+                ></div>
+              </Sheet>
+            </ModalDialog>
           </Modal>
         </CssVarsProvider>
       </>
