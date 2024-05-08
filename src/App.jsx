@@ -46,10 +46,10 @@ export default function ModalAlert() {
               <ModalClose variant="plain" sx={{ m: 1 }} />
               <Sheet
                 sx={{
-                  maxWidth: 500,
+                  maxWidth: 800,
                   borderRadius: "md",
-                  p: 1,
                   mt: 4,
+                  p: 1,
                   boxShadow: "lg",
                   overflowX: "hidden",
                   overflowY: "scroll",
@@ -63,6 +63,7 @@ export default function ModalAlert() {
                       ";base64," +
                       data[0]?.image.$content
                     }
+                    alt={data[0]?.alt_text}
                   />
                 </AspectRatio>
                 <Typography
@@ -71,7 +72,8 @@ export default function ModalAlert() {
                   level="h4"
                   textColor="inherit"
                   fontWeight="lg"
-                  mb={1}
+                  mb={4}
+                  mt={2}
                 >
                   {data[0]?.title}
                 </Typography>
