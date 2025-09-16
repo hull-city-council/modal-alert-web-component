@@ -19,7 +19,7 @@ export default function ModalAlert() {
   }
 
   const { isLoading, data } = useFetch(
-    `https://prod-225.westeurope.logic.azure.com/workflows/14d28202dcc447fd9865c11b49daadd8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=RaKBqCtzz-LGPL4Rkok-zwxY3RPuM7z1jOD_I5Sr0vU`,
+    `https://default998b793dd1774b888be16fe1f323a7.0b.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/14d28202dcc447fd9865c11b49daadd8/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=dxuCrpVDveBiw95WLglnVJmd9bq8MJES0kxFsJTX2wk`,
   );
 
   if (
